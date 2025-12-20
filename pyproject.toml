@@ -3,8 +3,68 @@ name = "study-graph"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
-    "networkx>=3.6.1",
-    "numpy>=2.3.5",
+    "ipykernel>=7.1.0",
+    "matplotlib>=3.10.8",
+    # "networkx>=3.6.1",
+    # "numpy>=2.3.5",
+    "networkx>=3.4.2",
+    "numpy>=2.2.6",
+    "pandas>=2.3.3",
+    # "scipy>=1.16.3",
+    "scipy>=1.15.3",
+    "torch-geometric>=2.7.0",
 ]
+
+
+[project.optional-dependencies]
+cpu = ["torch>=2.6.0", "torchvision>=0.21.0"]
+cu124 = ["torch>=2.6.0", "torchvision>=0.21.0"]
+cu128 = ["torch>=2.6.0", "torchvision>=0.21.0"]
+cu130 = ["torch>=2.6.0", "torchvision>=0.21.0"]
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "cu124" },
+        { extra = "cu128" },
+        { extra = "cu130" },
+    ],
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu124", extra = "cu124" },
+    { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu124", extra = "cu124" },
+    { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
